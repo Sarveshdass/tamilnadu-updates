@@ -1,0 +1,63 @@
+name: 🔴 Tamil Nadu Auto Poster
+
+on:
+  schedule:
+    # Post 1: 9:00 AM IST = 3:30 AM UTC
+    - cron: '30 3 * * *'
+    # Post 2: 6:00 PM IST = 12:30 PM UTC
+    - cron: '30 12 * * *'
+
+  # Also allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why are you running this manually?'
+        required: false
+        default: 'Manual test'
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Needed to push website updates
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: 🔤 Install Fonts (for image generation)
+        run: |
+          sudo apt-get install -y fonts-dejavu fonts-liberation
+
+      - name: 🚀 Run Auto Poster
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IMGBB_API_KEY: ${{ secrets.IMGBB_API_KEY }}
+        run: 
+          python main.py
+
+      - name: 🌐 Commit & Push Website Updates
+        run: |
+          git config --global user.email "tamilnadu-bot@github.com"
+          git config --global user.name "TamilNadu Auto Bot"
+          git add website/ posted_titles.json
+          git diff --staged --quiet || git commit -m "🔴 Auto post: $(date +'%Y-%m-%d %H:%M IST')"
+          git push
+        continue-on-error: true
+
+      - name: ✅ Done
+        run: echo "Post complete! Check Instagram and the website."
