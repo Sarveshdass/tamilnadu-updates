@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamil Nadu Updates – Daily News & Updates</title>
+<meta name="description" content="Latest news and updates from Tamil Nadu. Auto-updated twice daily.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #e63946;
+  --dark: #0f1923;
+  --mid: #1e2d3d;
+  --light: #2d3f50;
+  --text: #e8edf2;
+  --muted: #8899aa;
+  --accent: #457b9d;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--dark); color: var(--text); font-family: 'DM Sans', sans-serif; }
+
+/* HEADER */
+header {
+  background: var(--dark);
+  border-bottom: 3px solid var(--red);
+  padding: 0 24px;
+  position: sticky; top: 0; z-index: 100;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 70px;
+}
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-dot { width: 14px; height: 14px; background: var(--red); border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+.logo-text { font-size: 22px; font-weight: 700; color: var(--text); }
+.logo-sub { font-size: 12px; color: var(--muted); letter-spacing: 2px; }
+.ig-link {
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  color: white; padding: 8px 18px; border-radius: 6px;
+  text-decoration: none; font-size: 14px; font-weight: 600;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--mid), var(--dark));
+  padding: 60px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--light);
+}
+.hero h1 { font-size: clamp(28px, 5vw, 52px); line-height: 1.2; }
+.hero h1 span { color: var(--red); }
+.hero p { color: var(--muted); margin-top: 16px; font-size: 18px; }
+.update-badge {
+  display: inline-block; margin-top: 20px;
+  background: var(--light); border-radius: 20px;
+  padding: 6px 16px; font-size: 13px; color: var(--muted);
+}
+
+/* GRID */
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* CARDS */
+.post-card {
+  background: var(--mid);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  border: 1px solid var(--light);
+}
+.post-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,.4); }
+.post-card.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; }
+.post-image { width: 100%; height: 220px; object-fit: cover; }
+.featured .post-image { height: 100%; min-height: 300px; }
+.post-body { padding: 20px; }
+.category-tag {
+  display: inline-block; padding: 3px 10px; border-radius: 4px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px;
+}
+.post-title { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+.featured .post-title { font-size: 26px; }
+.post-excerpt { color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+.post-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+.post-source, .post-date { font-size: 12px; color: var(--muted); }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.85); z-index: 1000;
+  overflow-y: auto; padding: 40px 20px;
+}
+.modal-overlay.active { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+  background: var(--mid); border-radius: 16px;
+  max-width: 760px; width: 100%; padding: 40px;
+  position: relative; margin: auto;
+}
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--light); border: none; color: var(--text);
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+  font-size: 18px;
+}
+.modal h2 { font-size: 26px; line-height: 1.4; margin-bottom: 20px; }
+.modal p { color: var(--muted); line-height: 1.8; font-size: 16px; margin-bottom: 16px; }
+.modal-source { font-size: 13px; color: var(--accent); }
+.modal a { color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--mid); border-top: 1px solid var(--light);
+  text-align: center; padding: 30px;
+  color: var(--muted); font-size: 13px;
+}
+
+@media (max-width: 700px) {
+  .post-card.featured { grid-template-columns: 1fr; }
+  .featured .post-image { height: 220px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-dot"></div>
+      <div>
+        <div class="logo-text">Tamil Nadu Updates</div>
+        <div class="logo-sub">AUTO-UPDATED TWICE DAILY</div>
+      </div>
+    </a>
+    <a href="https://instagram.com/TamilNaduUpdates" class="ig-link" target="_blank">
+      📸 Follow on Instagram
+    </a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Latest News from<br><span>Tamil Nadu</span></h1>
+  <p>Auto-curated updates, posted every morning & evening</p>
+  <div class="update-badge">🔄 Last updated: 11 May 2026, 06:52 AM IST</div>
+</div>
+
+<div class="container">
+  <div class="posts-grid">
+    
+        <article class="post-card featured" onclick="openPost('20260511065252')">
+            <img src="images/20260511065252.jpg" alt="Newly elected Tamil Nadu MLAs take oath in Assembly" class="post-image">
+            <div class="post-body">
+                <span class="category-tag" style="background:#e63946">General</span>
+                <h2 class="post-title">Newly elected Tamil Nadu MLAs take oath in Assembly</h2>
+                <p class="post-excerpt">After taking oath, the newly elected members signed in the Assembly register
+
+This is an important development for Tamil Nadu. Readers are encouraged to follow the source link for ...</p>
+                <div class="post-meta">
+                    <span class="post-source">📰 The Hindu - Tamil Nadu</span>
+                    <span class="post-date">🕐 2026-05-11 06:41</span>
+                </div>
+            </div>
+        </article>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closePost()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer>
+  <p>Tamil Nadu Updates • Auto-generated news • Updated twice daily</p>
+  <p style="margin-top:8px">Follow us on <a href="https://instagram.com/TamilNaduUpdates" style="color:#fd1d1d">Instagram</a></p>
+</footer>
+
+<script>
+const posts = [{"id": "20260511065252", "title": "Newly elected Tamil Nadu MLAs take oath in Assembly", "content": "After taking oath, the newly elected members signed in the Assembly register\n\nThis is an important development for Tamil Nadu. Readers are encouraged to follow the source link for the complete story.\n\nStay tuned to Tamil Nadu Updates for more news from across the state.", "source": "The Hindu - Tamil Nadu", "source_link": "https://www.thehindu.com/news/national/tamil-nadu/newly-elected-tamil-nadu-mlas-take-oath-17th-tamil-nadu-assembly/article70964409.ece", "category": "General", "published": "2026-05-11 06:41", "generated_at": "2026-05-11 06:52:52", "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAIBAQEBAQIBAQECAgICAgQDAgICAgUEBAMEBgUGBgYFBgYGBwkIBgcJBwYGCAsICQoKCgoKBggLDAsKDAkKCgr/2wBDAQICAgICAgUDAwUKBwYHCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgr/wAARCAQ4BDgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDx...", "image_file": "images/20260511065252.jpg"}];
+
+function openPost(id) {
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+  const img = post.image_file ? `<img src="${post.image_file}" style="width:100%;border-radius:8px;margin-bottom:20px">` : '';
+  document.getElementById('modal-content').innerHTML = `
+    ${img}
+    <span class="category-tag" style="background:#e63946;margin-bottom:16px;display:inline-block">${post.category || 'News'}</span>
+    <h2>${post.title}</h2>
+    <p style="margin-top:16px">${post.content.replace(/\n/g,'<br>')}</p>
+    <p class="modal-source">
+      📰 ${post.source} | 🕐 ${post.published}<br>
+      <a href="${post.source_link}" target="_blank">Read full story →</a>
+    </p>
+  `;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePost() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target.id === 'modalOverlay') closePost();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePost(); });
+</script>
+</body>
+</html>
